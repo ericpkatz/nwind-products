@@ -10,9 +10,12 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "cheerio": "^0.20.0",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
   },
   "dependencies": {
-    "mongoose": "^4.4.6"
+    "mongoose": "^4.4.6",
+    "swig": "^1.4.2"
   }
 }
