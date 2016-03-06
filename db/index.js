@@ -2,10 +2,10 @@
 var mongoose = require('mongoose');
 
 var productSchema = mongoose.Schema({
-  name: String,
+  name: {type: String, require: true},
   discontinued:   { type: Boolean, default: false },
   numberInStock:  { type: Number, default: 0 },
-  description:    { type: String }
+  description:    { type: String, required: true }
 });
 
 var Product = mongoose.model('product', productSchema); 

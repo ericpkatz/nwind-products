@@ -1,20 +1,20 @@
 <html>
   <head>
+    <title>{{title}}</title>
   </head>
   <body>
     <ul>
-      <li {% if mode === 'home' %} class='active' {% endif %}>
-        <a href='/'>
-          Home
-        </a>
-      </li>
-      <li {% if mode === 'products' %} class='active' {% endif %}>
-        <a href='/'>
-          Products
-        </a>
-      </li>
+      {% for page in pages %}
+      <li {% if mode === page.mode %} class='active' {% endif %}>
+        <a href='{{ page.url }}'>
+          {{ page.text }} 
+          </a>
+        </li>
+      {% endfor %}
     </ul>
     Foo
+    {% block content  %}
+    {% endblock %}
   </body>
 </html>
 

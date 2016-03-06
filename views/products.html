@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% if title === 'Products' %}
+<a href='/products/active'>Filter Active Products</a>
+{% else %}
+<a href='/products'>Show All Products</a>
+{% endif %}
+  <ul class='list-group'>
+    {% for product in products %}
+    <li>
+      {% if title === 'Products' %}
+        {% if product === selected %}
+          <a href='/products'>{{ product.name }}</a>
+        {% else %}
+          <a href='/products/{{product.name}}'>{{ product.name }}</a>
+        {% endif %}
+      {% else %}
+        {% if product === selected %}
+          <a href='/products/active'>{{ product.name }}</a>
+        {% else %}
+          <a href='/products/active/{{product.name}}'>{{ product.name }}</a>
+        {% endif %}
+      {% endif %}
+      {% if product === selected %}
+      <div>{{ product.description }}</div>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
