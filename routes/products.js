@@ -90,6 +90,7 @@ app.get('/:name', function(req, res, next){
       var selected = products.filter(function(product){
         return product.name === req.params.name;
       })[0];
+      console.log(selected);
       res.render('products', { title: 'Products', mode: 'products', products: products, selected: selected });
     });
 });
