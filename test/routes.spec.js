@@ -1,3 +1,4 @@
+process.env.CONN = 'mongodb://localhost/nwind-test';
 var cheerio = require('cheerio');
 var app = require('supertest')(require('../app'));
 var expect = require('chai').expect;
@@ -40,8 +41,8 @@ describe('Routes', function(){
       app.get('/products')
         .end(function(err, res){
           var $ = cheerio.load(res.text);
-          var ul = $('ul.list-group');
-          expect(ul.children().length).to.eq(3);
+          var products = $('div.product');
+          expect(products.length).to.eq(3);
           var title = $('title');
           expect(title.text()).to.equal('Products');
           done();
@@ -52,8 +53,8 @@ describe('Routes', function(){
       app.get('/products')
         .end(function(err, res){
           var $ = cheerio.load(res.text);
-          var ul = $('a:contains("Filter Active Products")');
-          expect(ul.length).to.eq(1);
+          var link = $('a:contains("Filter Active Products")');
+          expect(link.length).to.eq(1);
           done();
         });
     });
@@ -75,7 +76,7 @@ describe('Routes', function(){
       app.get(url)
         .end(function(err, res){
           var $ = cheerio.load(res.text);
-          var description = $('div:contains("foo description")');
+          var description = $('div.detail:contains("foo description")');
           expect(description.length).to.eq(1);
           var link = $('a:contains("foo")');
           expect(link.attr('href')).to.eq('/products');
@@ -84,13 +85,13 @@ describe('Routes', function(){
     });
   });
 
-  describe('Product details', function(){
+  describe('Product details on active page', function(){
     it('the product details are shown', function(done){
       var url = `/products/active/bar`;
       app.get(url)
         .end(function(err, res){
           var $ = cheerio.load(res.text);
-          var description = $('div:contains("bar description")');
+          var description = $('div.detail:contains("bar description")');
           expect(description.length).to.eq(1);
           var link = $('a:contains("bar")');
           expect(link.attr('href')).to.eq('/products/active');
@@ -104,8 +105,8 @@ describe('Routes', function(){
       app.get('/products/active')
         .end(function(err, res){
           var $ = cheerio.load(res.text);
-          var ul = $('ul.list-group');
-          expect(ul.children().length).to.eq(2);
+          var products = $('div.product');
+          expect(products.length).to.eq(2);
           done();
         });
     });
@@ -114,8 +115,8 @@ describe('Routes', function(){
       app.get('/products/active')
         .end(function(err, res){
           var $ = cheerio.load(res.text);
-          var ul = $('a:contains("Show All Products")');
-          expect(ul.length).to.eq(1);
+          var link = $('a:contains("Show All Products")');
+          expect(link.length).to.eq(1);
           done();
         });
     });

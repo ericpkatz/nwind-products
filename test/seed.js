@@ -1,4 +1,3 @@
-process.env.CONN = 'mongodb://localhost/nwind-test';
 var db = require('../db');
 var Product = db.models.Product;
 

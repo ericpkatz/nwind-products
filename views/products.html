@@ -1,13 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
-{% if title === 'Products' %}
-<a href='/products/active'>Filter Active Products</a>
-{% else %}
-<a href='/products'>Show All Products</a>
-{% endif %}
-  <ul class='list-group'>
+<div class='controls'>
+  {% if title === 'Products' %}
+  <a href='/products/active' class='btn btn-default'>Filter Active Products</a>
+  {% else %}
+  <a href='/products' class='btn btn-default'>Show All Products</a>
+  {% endif %}
+</div>
     {% for product in products %}
-    <li>
+    <div class='product panel panel-danger'>
+      <h2>
       {% if title === 'Products' %}
         {% if product === selected %}
           <a href='/products'>{{ product.name }}</a>
@@ -21,10 +23,15 @@
           <a href='/products/active/{{product.name}}'>{{ product.name }}</a>
         {% endif %}
       {% endif %}
+      </h2>
       {% if product === selected %}
-      <div>{{ product.description }}</div>
+      <div class='detail'>
+        {{ product.description }}
+        <form method='POST' action='/products/{{product.id}}?_method=DELETE'>
+          <button class='btn btn-danger' type='submit'>Delete</button>
+        </form>
+      </div>
       {% endif %}
-    </li>
+    </div>
     {% endfor %}
-  </ul>
 {% endblock %}

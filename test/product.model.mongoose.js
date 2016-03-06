@@ -1,3 +1,4 @@
+process.env.CONN = 'mongodb://localhost/nwind-test';
 var expect = require('chai').expect;
 var db = require('../db');
 var Product = db.models.Product;

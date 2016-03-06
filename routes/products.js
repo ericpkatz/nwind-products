@@ -11,14 +11,14 @@ app.post('/', function(req, res, next){
 });
 
 app.delete('/:id', function(req, res, next){
-  Product.remove({ id: req.params.id })
+  Product.remove({ _id: req.params.id })
     .then(function(product){
       res.redirect('/products');
     }, next);
 });
 
 app.delete('/active/:id', function(req, res, next){
-  Product.remove({ id: req.params.id })
+  Product.remove({ _id: req.params.id })
     .then(function(product){
       res.redirect('/products/active');
     }, next);

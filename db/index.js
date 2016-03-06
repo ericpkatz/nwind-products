@@ -16,7 +16,7 @@ module.exports = {
     if(_conn)
       return _conn;
     _conn = new Promise(function(resolve, reject){
-      mongoose.connect(process.env.CONN, function(err){
+      mongoose.connect(process.env.CONN || 'mongodb://localhost/nwind', function(err){
           if(err)
             return reject(err);
           resolve(mongoose.connection);

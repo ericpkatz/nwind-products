@@ -1,9 +1,11 @@
 <html>
   <head>
     <title>{{title}}</title>
+    <link rel='stylesheet' href='/vendor/bootstrap/dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='/public/css/styles.css' />
   </head>
   <body>
-    <ul>
+    <ul class='nav nav-tabs'>
       {% for page in pages %}
       <li {% if mode === page.mode %} class='active' {% endif %}>
         <a href='{{ page.url }}'>
@@ -12,9 +14,10 @@
         </li>
       {% endfor %}
     </ul>
-    Foo
+    <div class='container content'>
     {% block content  %}
     {% endblock %}
+    </div>
   </body>
 </html>
 
