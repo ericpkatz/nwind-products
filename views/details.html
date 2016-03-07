@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class='col-sm-4'>
-  <form method='POST' action='/products/{{product.id}}?_method=DELETE'>
+    <form method='POST' action='{{ getDeleteAction(title, product) }}?_method=DELETE'>
     <button class='btn btn-danger btn-block' type='submit'>Delete</button>
   </form>
   </div>
