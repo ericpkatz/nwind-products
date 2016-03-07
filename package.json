@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "CONN=mongodb://localhost/nwind-test ./node_modules/mocha/bin/mocha && CONN=sqlite3:nwind-test ./node_modules/mocha/bin/mocha"
+    "test": "CONN=mongodb://localhost/nwind-test ./node_modules/mocha/bin/mocha && CONN=sqlite:nwind-test.db ./node_modules/mocha/bin/mocha",
+    "sequelize": "CONN=sqlite:nwind.db node server",
+    "mongoose": "CONN=mongodb://localhost/nwind node server"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +23,8 @@
     "express": "^4.13.4",
     "method-override": "^2.3.5",
     "mongoose": "^4.4.6",
+    "sequelize": "^3.19.3",
+    "sqlite3": "^3.1.1",
     "swig": "^1.4.2"
   }
 }

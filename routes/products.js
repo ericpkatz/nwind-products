@@ -48,7 +48,7 @@ app.use(function(req, res, next){
 
 function deleteRoute(redirectTo){
   return function(req, res, next){
-    Product.remove({ _id: req.params.id })
+    Product.removeById(req.params.id)
       .then(function(product){
         res.redirect(redirectTo);
       }, next);
@@ -83,7 +83,7 @@ function createRoute(redirectTo){
 
 function listRoute(filter, title){
   return function(req, res, next){
-    Product.find(filter)
+    Product.getAll(filter)
       .then(function(products){
         res.render('products', { title: title, mode: 'products', products: products });
       }, next);
@@ -94,7 +94,7 @@ function listRoute(filter, title){
 
 function detailRoute(filter, title){
   return function(req, res, next){
-    Product.find(filter)
+    Product.getAll(filter)
       .then(function(products){
         var selected = products.filter(function(product){
           return product.name == req.params.name;

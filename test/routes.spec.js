@@ -101,7 +101,7 @@ describe('Routes', function(){
   });
 
   describe('The active products page', function(){
-    it('there are three products', function(done){
+    it('there are two products', function(done){
       app.get('/products/active')
         .end(function(err, res){
           var $ = cheerio.load(res.text);

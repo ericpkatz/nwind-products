@@ -16,7 +16,7 @@ describe('Product', function(){
   });
 
   it('there are three products', function(done){
-    Product.find()
+    Product.getAll()
       .then(function(products){
         expect(products.length).to.equal(3);
         done();

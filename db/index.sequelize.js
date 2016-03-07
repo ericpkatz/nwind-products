@@ -1,14 +1,5 @@
-//if connection string is mongoose
-if(process.env.CONN.indexOf('mongodb') === 0){
-    module.exports = require('./index.mongoose');
-}
-else {
-    module.exports = require('./index.sequelize');
-  /*
-    console.log('Hit Me');
     var Sequelize = require('sequelize');
     var db = new Sequelize(process.env.CONN || 'sqlite:nwind.db');
-    console.log('DB', db);
 
     var productSchema = {
       name: {unique: true, type: Sequelize.STRING, required: true},
@@ -17,17 +8,24 @@ else {
       description:    { type: Sequelize.STRING, required: true }
     };
 
-    var Product = db.define('product', productSchema); 
+    var Product = db.define('product', productSchema, {
+      classMethods: {
+        getAll : function(filter){
+          filter = filter || {};
+          var where = { where: filter };
+          return this.findAll(where);
+        },
+        removeById : function(id){
+          return this.destroy({ where: { id: id }});
+        }
+      }
+    }); 
 
     var _conn;
 
     function connect(){
-      console.log(Sequelize);
         if(_conn)
           return _conn;
-        if(!db)
-          db = new Sequelize(process.env.CONN || 'sqlite:nwind.db');
-        console.log('CONN', db);
         _conn = db.authenticate(); 
         return _conn;
       }
@@ -36,7 +34,7 @@ else {
         var products = {};
         return connect()
           .then(function(){
-            return Product.remove({});
+            return db.sync({ force: true });
           })
           .then(function(){
             return Product.create({ name: 'foo', description: 'foo description', discontinued: true });
@@ -61,6 +59,3 @@ else {
     },
     seed: seed 
   }
-  */
-}
-

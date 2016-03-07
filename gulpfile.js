@@ -1,6 +1,6 @@
 var gulp = require('gulp');
-var seed = require('./test/seed')
+var db = require('./db');
 
 gulp.task('seed', function(){
-  return seed();
+  return db.seed();
 });
