@@ -1,1 +1,14 @@
 {% extends 'layout.html' %}
+{% block content %}
+{% if error %}
+<div class='alert alert-danger'>{{ error | json }}</div>
+{% endif %}
+<div class='well'>
+  Welcome to Northwind Products! Feel free to do the following:
+  <ul>
+    <li>Insert a product</li>
+    <li>Discontinue/Recontinue a product</li>
+    <li>Set the number of items in stock</li>
+  </ul>
+</div>
+{% endblock %}

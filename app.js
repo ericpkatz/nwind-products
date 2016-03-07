@@ -34,3 +34,7 @@ app.get('/', function(req, res, next){
 
 app.use('/products', require('./routes/products'));
 
+app.use(function(err, req, res, next){
+  res.render('index', { error: err, mode: 'home', title: 'Home' });
+});
+

@@ -1,8 +1,7 @@
-//how to make config determine the model?
 var mongoose = require('mongoose');
 
 var productSchema = mongoose.Schema({
-  name: {type: String, require: true},
+  name: {unique: true, type: String, require: true},
   discontinued:   { type: Boolean, default: false },
   numberInStock:  { type: Number, default: 0 },
   description:    { type: String, required: true }

@@ -1,41 +1,12 @@
 <div class='row'>
   <div class='col-sm-6'>
-<form action='/products/{{product.id}}?_method=PUT' method='POST'>
-  <div class='col-sm-6'>
-  <input type='number' name='numberInStock' value='{{product.numberInStock}}' class='form-control' />
-  </div>
-  <div class='col-sm-6'>
-  <button class='btn btn-default btn-block' type='submit'>Update</button>
-  </div>
-</form>
+    {% include 'stockForm.html' %}
   </div>
   <div class='col-sm-4'>
-{% if product.discontinued === false %}
-  <form action='/products/{{product.id}}?_method=PUT' method='POST'>
-    <input type='hidden' name='discontinued' value='true' class='form-control' />
-    <button class='btn btn-warning btn-block' type='submit'>Discontinue</button>
-  </form>
-{% else %}
-
-  <form action='/products/{{product.id}}?_method=PUT' method='POST'>
-    <input type='hidden' name='discontinued' value='false' class='form-control' />
-    <button class='btn btn-default btn-block' type='submit'>Recontinue</button>
-  </form>
-{% endif %}
+    {% include 'discontinueForm.html' %}
   </div>
 </div>
 
 {% if product === selected %}
-<div class='detail row'>
-  <div class='col-sm-6'>
-    <div class='well'>
-      {{ product.description }}
-    </div>
-  </div>
-  <div class='col-sm-4'>
-  <form method='POST' action='/products/{{product.id}}?_method=DELETE'>
-    <button class='btn btn-danger btn-block' type='submit'>Delete</button>
-  </form>
-  </div>
-</div>
+{% include 'details.html' %}
 {% endif %}

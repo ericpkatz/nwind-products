@@ -23,5 +23,4 @@ module.exports = function(){
       products.bazz = bazz;
       return products;
     });
-
 };

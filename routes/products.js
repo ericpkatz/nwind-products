@@ -3,6 +3,23 @@ var Product = require('../db').models.Product;
 
 module.exports = app;
 
+function update(id, body){
+  return Product.findById(id)
+    .then(function(product){
+      if(body.discontinued !== undefined)
+        product.discontinued = body.discontinued;
+      if(body.numberInStock !== undefined)
+        product.numberInStock = body.numberInStock;
+      return product.save();
+    });
+}
+
+function getSelected(products, name){
+  return products.filter(function(product){
+    return product.name === name;
+  })[0];
+}
+
 app.post('/', function(req, res, next){
   Product.create(req.body)
     .then(function(product){
@@ -25,28 +42,14 @@ app.delete('/active/:id', function(req, res, next){
 });
 
 app.put('/:id', function(req, res, next){
-  Product.findById(req.params.id)
-    .then(function(product){
-      if(req.body.discontinued !== undefined)
-        product.discontinued = req.body.discontinued;
-      if(req.body.numberInStock !== undefined)
-        product.numberInStock = req.body.numberInStock;
-      return product.save();
-    })
+  update(req.params.id, req.body)
     .then(function(product){
       res.redirect('/products');
     }, next);
 });
 
 app.put('/active/:id', function(req, res, next){
-  Product.findById(req.params.id)
-    .then(function(product){
-      if(req.body.discontinued !== undefined)
-        product.discontinued = req.body.discontinued;
-      if(req.body.numberInStock !== undefined)
-        product.numberInStock = req.body.numberInStock;
-      return product.save();
-    })
+  update(req.params.id, req.body)
     .then(function(product){
       res.redirect('/products/active');
     }, next);
@@ -74,12 +77,11 @@ app.get('/active', function(req, res, next){
     });
 });
 
+
 app.get('/active/:name', function(req, res, next){
   Product.find({ discontinued: false })
     .then(function(products){
-      var selected = products.filter(function(product){
-        return product.name === req.params.name;
-      })[0];
+      var selected = getSelected(products, req.params.name);
       res.render('products', { title: 'Active Products', mode: 'products', products: products, selected: selected });
     });
 });
@@ -87,10 +89,7 @@ app.get('/active/:name', function(req, res, next){
 app.get('/:name', function(req, res, next){
   Product.find()
     .then(function(products){
-      var selected = products.filter(function(product){
-        return product.name === req.params.name;
-      })[0];
-      console.log(selected);
+      var selected = getSelected(products, req.params.name);
       res.render('products', { title: 'Products', mode: 'products', products: products, selected: selected });
     });
 });

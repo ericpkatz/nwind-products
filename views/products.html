@@ -1,23 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class='controls'>
-  {% if title === 'Products' %}
-  <a href='/products/active' class='btn btn-default'>Filter Active Products</a>
-  {% else %}
-  <a href='/products' class='btn btn-default'>Show All Products</a>
-  {% endif %}
-</div>
-<div class='well'>
-  <form method='POST' action='/products'>
-    <div class='form-group'>
-      <input name='name' class='form-control' placeholder='Enter name' />
-    </div>
-    <div class='form-group'>
-      <input name='description' class='form-control' placeholder='Enter description' />
-    </div>
-    <button class='btn btn-primary' type='submit'>Insert Product</button>
-  </form>
-</div>
+{% include 'filter.html' %}
+{% include 'insertForm.html' %}
     {% for product in products %}
     <div class='product panel panel-default'>
       <div class='panel-heading'>
