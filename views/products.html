@@ -3,7 +3,7 @@
 {% include 'filter.html' %}
 {% include 'insertForm.html' %}
     {% for product in products %}
-    <div class='product panel panel-default'>
+    <div class='product panel panel-default {{ panelClass( product )}}'>
       <div class='panel-heading'>
         <h3>
           <a href='{{ getDetailLink(title, product, selected) }}'>{{product.name }}</a>

@@ -5,3 +5,7 @@
 .controls {
   margin: 10px 0;
 }
+
+.discontinued {
+  background-color: #999;
+}

@@ -4,6 +4,13 @@ var Product = require('../db').models.Product;
 module.exports = app;
 
 app.use(function(req, res, next){
+  res.locals.panelClass = function(product){
+    if(product.discontinued)
+      return 'discontinued';
+    else
+      return '';
+  };
+
   res.locals.getDeleteAction = function(title, product){
     if(title === 'Products')
       return `/products/${product.id}`;
