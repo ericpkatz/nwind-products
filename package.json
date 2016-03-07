@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "CONN=mongodb://localhost/nwind-test ./node_modules/mocha/bin/mocha && CONN=sqlite3:nwind-test ./node_modules/mocha/bin/mocha"
   },
   "author": "",
   "license": "ISC",

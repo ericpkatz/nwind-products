@@ -1,12 +1,10 @@
-process.env.CONN = 'mongodb://localhost/nwind-test';
 var expect = require('chai').expect;
 var db = require('../db');
 var Product = db.models.Product;
-var seed = require('./seed');
 
 describe('Product', function(){
   beforeEach(function(done){
-    seed()
+    db.seed()
       .then(function(){
         done();
       }, done);

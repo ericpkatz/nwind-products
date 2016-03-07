@@ -1,12 +1,12 @@
-process.env.CONN = 'mongodb://localhost/nwind-test';
 var cheerio = require('cheerio');
 var app = require('supertest')(require('../app'));
 var expect = require('chai').expect;
+var db = require('../db');
 
 describe('Routes', function(){
   var products;
   beforeEach(function(done){
-    require('./seed')()
+    db.seed()
       .then(function(_products){
         products = _products;
         done();
