@@ -7,7 +7,7 @@ swig.setDefaults({cache: false});
 
 var app = express();
 app.use('/vendor', express.static(path.join(__dirname, 'node_modules')));
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/client', express.static(path.join(__dirname, 'client')));
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 
