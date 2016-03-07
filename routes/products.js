@@ -3,10 +3,6 @@ var Product = require('../db').models.Product;
 
 module.exports = app;
 
-
-function getSelected(products, name){
-}
-
 app.use(function(req, res, next){
   res.locals.getDeleteAction = function(title, product){
     if(title === 'Products')
@@ -24,6 +20,19 @@ app.use(function(req, res, next){
     if(title === 'Products')
       return `/products/`;
     return `/products/active`;
+  };
+
+  res.locals.getDetailLink = function(title, product, selected){
+    if(title === 'Products'){
+      if(product === selected)
+        return '/products';
+      else
+        return `/products/${product.name}`;
+    }
+    if(product === selected)
+      return '/products/active';
+    else
+      return `/products/active/${product.name}`;
   };
 
   next();
@@ -51,7 +60,7 @@ function updateRoute(redirectTo){
       })
       .then(function(){
         res.redirect(redirectTo);
-      });
+      }, next);
   };
 }
 
@@ -81,11 +90,11 @@ function detailRoute(filter, title){
     Product.find(filter)
       .then(function(products){
         var selected = products.filter(function(product){
-          return product.name = req.params.name;
+          return product.name == req.params.name;
         })[0]; 
         res.render('products', { title: title, mode: 'products', products: products, selected: selected });
-      });
-  }
+      }, next);
+  };
 }
 app.delete('/:id', deleteRoute('/products')); 
 

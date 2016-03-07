@@ -6,19 +6,7 @@
     <div class='product panel panel-default'>
       <div class='panel-heading'>
         <h3>
-      {% if title === 'Products' %}
-        {% if product === selected %}
-          <a href='/products'>{{ product.name }}</a>
-        {% else %}
-          <a href='/products/{{product.name}}'>{{ product.name }}</a>
-        {% endif %}
-      {% else %}
-        {% if product === selected %}
-          <a href='/products/active'>{{ product.name }}</a>
-        {% else %}
-          <a href='/products/active/{{product.name}}'>{{ product.name }}</a>
-        {% endif %}
-      {% endif %}
+          <a href='{{ getDetailLink(title, product, selected) }}'>{{product.name }}</a>
         </h3>
       </div>
       <div class='panel-body'>
