@@ -1,5 +1,5 @@
 <div class='well'>
-  <form method='POST' action='/products'>
+  <form method='POST' action='{{ getInsertAction(title)}}'>
     <div class='row'>
       <div class='col-sm-6'>
         <input name='name' class='form-control' placeholder='Enter name' />

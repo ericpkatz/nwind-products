@@ -1,11 +1,12 @@
 {% if product.discontinued === false %}
-  <form action='/products/{{product.id}}?_method=PUT' method='POST'>
+  
+  <form action='{{ getEditAction(title, product) }}?_method=PUT' method='POST'>
     <input type='hidden' name='discontinued' value='true' class='form-control' />
     <button class='btn btn-warning btn-block' type='submit'>Discontinue</button>
   </form>
 {% else %}
 
-  <form action='/products/{{product.id}}?_method=PUT' method='POST'>
+  <form action='{{ getEditAction(title, product) }}?_method=PUT' method='POST'>
     <input type='hidden' name='discontinued' value='false' class='form-control' />
     <button class='btn btn-default btn-block' type='submit'>Recontinue</button>
   </form>

@@ -20,6 +20,25 @@ function getSelected(products, name){
   })[0];
 }
 
+app.use(function(req, res, next){
+  res.locals.getEditAction = function(title, product){
+    if(title === 'Products')
+      return `/products/${product.id}`;
+    return `/products/active/${product.id}`;
+  };
+  next();
+});
+
+app.use(function(req, res, next){
+  res.locals.getInsertAction = function(title){
+    if(title === 'Products')
+      return `/products/`;
+    return `/products/active`;
+  };
+  next();
+
+});
+
 app.post('/', function(req, res, next){
   Product.create(req.body)
     .then(function(product){
