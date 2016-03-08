@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "CONN=sqlite:nwind-test.db ./node_modules/mocha/bin/mocha && CONN=mongodb://localhost/nwind-test ./node_modules/mocha/bin/mocha",
-    "sequelize": "CONN=sqlite:nwind.db node server",
+    "test": "CONN=postgres://localhost/circle_test ./node_modules/mocha/bin/mocha && CONN=mongodb://localhost/nwind-test ./node_modules/mocha/bin/mocha",
+    "sequelize": "CONN=postgres://localhost/nwind node server",
     "mongoose": "CONN=mongodb://localhost/nwind node server"
   },
   "author": "",
