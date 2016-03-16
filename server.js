@@ -11,4 +11,6 @@ db.connect()
     server.on('error', function(err){
       console.log(err);
     });
+  }, function(err){
+    console.log(err);
   });
